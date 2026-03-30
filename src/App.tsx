@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { NetworkProvider } from "@/context/NetworkContext";
 import AppLayout from "@/components/AppLayout";
+import DashboardPage from "@/pages/DashboardPage";
 import UploadPage from "@/pages/UploadPage";
 import VerifyPage from "@/pages/VerifyPage";
 import RecordsPage from "@/pages/RecordsPage";
@@ -19,7 +20,8 @@ const App = () => (
         <BrowserRouter>
           <AppLayout>
             <Routes>
-              <Route path="/" element={<UploadPage />} />
+              <Route path="/" element={<DashboardPage />} />
+              <Route path="/upload" element={<UploadPage />} />
               <Route path="/verify" element={<VerifyPage />} />
               <Route path="/records" element={<RecordsPage />} />
               <Route path="*" element={<NotFound />} />
