@@ -68,7 +68,7 @@ export default function UploadPage() {
   const processDocument = async () => {
     if (!file) return;
 
-    // Validate testnet requirements
+    // Validate mainnet requirements
     if (isReal) {
       if (!config.lighthouseApiKey) {
         toast.error("Please configure Lighthouse API key in settings");
@@ -212,7 +212,7 @@ export default function UploadPage() {
       setStep("done");
       toast.success(
         isReal
-          ? "Document processed on testnet!"
+          ? "Document processed on mainnet!"
           : "Document processed (simulated)!"
       );
     } catch (err: any) {
@@ -237,7 +237,7 @@ export default function UploadPage() {
           Upload a PDF or image to hash, store, encrypt, and analyze
           {isReal && (
             <span className="ml-1 text-primary font-medium">
-              — using real testnet integrations
+              — using real mainnet integrations
             </span>
           )}
         </p>
@@ -337,7 +337,7 @@ export default function UploadPage() {
                   >
                     {s.label}
                     {isActive && isReal && (
-                      <span className="ml-1 text-xs text-primary/60">(testnet)</span>
+                      <span className="ml-1 text-xs text-primary/60">(mainnet)</span>
                     )}
                   </span>
                 </div>

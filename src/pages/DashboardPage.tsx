@@ -32,7 +32,7 @@ export default function DashboardPage() {
   const totalDocs = records.length;
   const authenticDocs = records.filter((r) => r.aiAnalysis.verdict === "authentic").length;
   const suspiciousDocs = totalDocs - authenticDocs;
-  const testnetDocs = records.filter((r) => r.mode === "mainnet").length;
+  const mainnetDocs = records.filter((r) => r.mode === "mainnet").length;
   const recentDocs = records.slice(0, 5);
 
   const integrations = [
@@ -114,7 +114,7 @@ export default function DashboardPage() {
         />
         <StatCard
           label="On Mainnet"
-          value={testnetDocs}
+          value={mainnetDocs}
           icon={Activity}
           accent="primary"
           delay={0.15}
@@ -199,7 +199,7 @@ export default function DashboardPage() {
                         <Clock className="h-2.5 w-2.5" />
                         {new Date(doc.createdAt).toLocaleDateString()}
                         {doc.mode === "mainnet" && (
-                          <span className="ml-1 text-primary">• testnet</span>
+                          <span className="ml-1 text-primary">• mainnet</span>
                         )}
                       </p>
                     </div>
