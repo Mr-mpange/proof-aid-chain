@@ -21,7 +21,7 @@ import { uploadToFilecoin } from "@/services/filecoin";
 import { storeProofOnChain } from "@/services/near";
 import { encryptDocument } from "@/services/lit";
 import { uploadToLighthouse } from "@/services/filecoin-real";
-import { storeProofOnNearTestnet } from "@/services/near-real";
+import { storeProofOnNearMainnet } from "@/services/near-real";
 import { encryptWithLit } from "@/services/lit-real";
 import { analyzeDocument, type AIAnalysisResult } from "@/services/ai";
 import { documentStore, type DocumentRecord } from "@/store/documentStore";
@@ -119,7 +119,7 @@ export default function UploadPage() {
       setStep("blockchain");
       let blockchainProof;
       if (isReal) {
-        const nearResult = await storeProofOnNearTestnet(hash, filecoinResult.cid);
+        const nearResult = await storeProofOnNearMainnet(hash, filecoinResult.cid);
         blockchainProof = {
           transactionHash: nearResult.transactionHash,
           blockHeight: nearResult.blockHeight,
