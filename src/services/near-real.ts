@@ -1,19 +1,21 @@
 /**
- * Real NEAR Protocol integration via near-api-js v4.
- * Connects to NEAR testnet and stores document proofs.
+ * Real NEAR Protocol integration — MAINNET.
+ * Connects to NEAR mainnet and stores document proofs.
  */
 
 import * as nearAPI from "near-api-js";
 
-const NEAR_TESTNET_CONFIG = {
-  networkId: "testnet",
-  nodeUrl: "https://rpc.testnet.near.org",
-  walletUrl: "https://testnet.mynearwallet.com",
-  helperUrl: "https://helper.testnet.near.org",
-  explorerUrl: "https://testnet.nearblocks.io",
+const NEAR_MAINNET_CONFIG = {
+  networkId: "mainnet",
+  nodeUrl: "https://rpc.mainnet.near.org",
+  walletUrl: "https://app.mynearwallet.com",
+  helperUrl: "https://helper.mainnet.near.org",
+  explorerUrl: "https://nearblocks.io",
 };
 
-const PROOF_CONTRACT = "guest-book.testnet";
+// For mainnet, you'd deploy your own contract.
+// Update this after deploying smart-contract/ to mainnet.
+const PROOF_CONTRACT = "guest-book.near";
 
 let nearConnection: nearAPI.Near | null = null;
 let walletConnection: nearAPI.WalletConnection | null = null;
@@ -24,7 +26,7 @@ export async function initNearConnection(): Promise<nearAPI.WalletConnection> {
   const keyStore = new nearAPI.keyStores.BrowserLocalStorageKeyStore();
 
   nearConnection = await nearAPI.connect({
-    ...NEAR_TESTNET_CONFIG,
+    ...NEAR_MAINNET_CONFIG,
     keyStore,
   });
 
@@ -60,11 +62,11 @@ export interface RealBlockchainProof {
   contractId: string;
   documentHash: string;
   filecoinCid: string;
-  network: "testnet";
+  network: "mainnet";
   explorerUrl: string;
 }
 
-export async function storeProofOnNearTestnet(
+export async function storeProofOnNearMainnet(
   documentHash: string,
   filecoinCid: string
 ): Promise<RealBlockchainProof> {
@@ -100,7 +102,7 @@ export async function storeProofOnNearTestnet(
     contractId: PROOF_CONTRACT,
     documentHash,
     filecoinCid,
-    network: "testnet",
-    explorerUrl: `${NEAR_TESTNET_CONFIG.explorerUrl}/txns/${txHash}`,
+    network: "mainnet",
+    explorerUrl: `${NEAR_MAINNET_CONFIG.explorerUrl}/txns/${txHash}`,
   };
 }
