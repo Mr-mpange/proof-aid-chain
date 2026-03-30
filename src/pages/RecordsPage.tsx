@@ -108,16 +108,23 @@ function RecordCard({ record }: { record: DocumentRecord }) {
             {new Date(record.createdAt).toLocaleString()}
           </p>
         </div>
-        <span
-          className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold ${
-            isAuthentic
-              ? "bg-accent/15 text-accent"
-              : "bg-destructive/15 text-destructive"
-          }`}
-        >
-          {isAuthentic ? <CheckCircle2 className="h-3 w-3" /> : <AlertTriangle className="h-3 w-3" />}
-          {isAuthentic ? "Authentic" : "Suspicious"}
-        </span>
+        <div className="flex items-center gap-2">
+          {record.mode === "testnet" && (
+            <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-mono text-primary">
+              TESTNET
+            </span>
+          )}
+          <span
+            className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold ${
+              isAuthentic
+                ? "bg-accent/15 text-accent"
+                : "bg-destructive/15 text-destructive"
+            }`}
+          >
+            {isAuthentic ? <CheckCircle2 className="h-3 w-3" /> : <AlertTriangle className="h-3 w-3" />}
+            {isAuthentic ? "Authentic" : "Suspicious"}
+          </span>
+        </div>
       </div>
 
       {/* Expanded details */}
