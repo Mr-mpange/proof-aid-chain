@@ -110,7 +110,7 @@ function RecordCard({ record }: { record: DocumentRecord }) {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          {record.mode === "testnet" && (
+          {record.mode === "mainnet" && (
             <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-mono text-primary">
               TESTNET
             </span>

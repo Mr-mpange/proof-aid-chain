@@ -29,7 +29,7 @@ export default function SettingsPanel() {
   const [lhKey, setLhKey] = useState(config.lighthouseApiKey);
 
   const handleToggleMode = () => {
-    const newMode = config.mode === "simulated" ? "testnet" : "simulated";
+    const newMode = config.mode === "simulated" ? "mainnet" : "simulated";
     setMode(newMode);
     toast.success(`Switched to ${newMode} mode`);
   };
@@ -102,17 +102,17 @@ export default function SettingsPanel() {
             {/* Mode Toggle */}
             <div className="flex items-center justify-between rounded-lg bg-secondary/50 p-3">
               <div className="flex items-center gap-2">
-                {config.mode === "testnet" ? (
+                {config.mode === "mainnet" ? (
                   <Wifi className="h-4 w-4 text-accent" />
                 ) : (
                   <WifiOff className="h-4 w-4 text-muted-foreground" />
                 )}
                 <div>
                   <p className="text-sm font-medium text-foreground">
-                    {config.mode === "testnet" ? "Testnet" : "Simulated"}
+                    {config.mode === "mainnet" ? "Mainnet" : "Simulated"}
                   </p>
                   <p className="text-[10px] text-muted-foreground">
-                    {config.mode === "testnet"
+                    {config.mode === "mainnet"
                       ? "Real blockchain integrations"
                       : "Mock services for demo"}
                   </p>

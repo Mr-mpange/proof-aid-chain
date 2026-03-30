@@ -19,7 +19,7 @@ export interface DocumentRecord {
   encryption: EncryptionResult;
   aiAnalysis: AIAnalysisResult;
   createdAt: number;
-  mode?: "simulated" | "testnet";
+  mode?: "simulated" | "mainnet";
   explorerUrl?: string;
   gatewayUrl?: string;
 }

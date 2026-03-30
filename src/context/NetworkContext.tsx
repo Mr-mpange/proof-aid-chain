@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useCallback, useEffect } from "react";
 
-export type NetworkMode = "simulated" | "testnet";
+export type NetworkMode = "simulated" | "mainnet";
 
 interface NetworkConfig {
   mode: NetworkMode;
@@ -63,7 +63,7 @@ export function NetworkProvider({ children }: { children: React.ReactNode }) {
     setConfig((c) => ({ ...c, litConnected }));
   }, []);
 
-  const isReal = config.mode === "testnet";
+  const isReal = config.mode === "mainnet";
 
   return (
     <NetworkContext.Provider

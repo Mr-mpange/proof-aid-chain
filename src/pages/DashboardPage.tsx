@@ -32,7 +32,7 @@ export default function DashboardPage() {
   const totalDocs = records.length;
   const authenticDocs = records.filter((r) => r.aiAnalysis.verdict === "authentic").length;
   const suspiciousDocs = totalDocs - authenticDocs;
-  const testnetDocs = records.filter((r) => r.mode === "testnet").length;
+  const mainnetDocs = records.filter((r) => r.mode === "mainnet").length;
   const recentDocs = records.slice(0, 5);
 
   const integrations = [
@@ -40,7 +40,7 @@ export default function DashboardPage() {
       name: "NEAR Protocol",
       icon: Link2,
       status: isReal && config.nearAccountId ? "connected" : isReal ? "not configured" : "simulated",
-      detail: config.nearAccountId || "Testnet",
+      detail: config.nearAccountId || "Mainnet",
       color: "primary" as const,
     },
     {
@@ -84,7 +84,7 @@ export default function DashboardPage() {
               <WifiOff className="h-4 w-4 text-muted-foreground" />
             )}
             <span className={`text-sm font-medium ${isReal ? "text-primary" : "text-muted-foreground"}`}>
-              {isReal ? "Testnet Active" : "Simulated Mode"}
+              {isReal ? "Mainnet Active" : "Simulated Mode"}
             </span>
           </div>
         </div>
@@ -113,8 +113,8 @@ export default function DashboardPage() {
           delay={0.1}
         />
         <StatCard
-          label="On Testnet"
-          value={testnetDocs}
+          label="On Mainnet"
+          value={mainnetDocs}
           icon={Activity}
           accent="primary"
           delay={0.15}
@@ -198,8 +198,8 @@ export default function DashboardPage() {
                       <p className="text-[10px] text-muted-foreground font-mono flex items-center gap-1">
                         <Clock className="h-2.5 w-2.5" />
                         {new Date(doc.createdAt).toLocaleDateString()}
-                        {doc.mode === "testnet" && (
-                          <span className="ml-1 text-primary">• testnet</span>
+                        {doc.mode === "mainnet" && (
+                          <span className="ml-1 text-primary">• mainnet</span>
                         )}
                       </p>
                     </div>
@@ -269,7 +269,7 @@ export default function DashboardPage() {
             <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
               Network Info
             </p>
-            <InfoRow label="Mode" value={isReal ? "Testnet" : "Simulated"} />
+            <InfoRow label="Mode" value={isReal ? "Mainnet" : "Simulated"} />
             <InfoRow label="NEAR" value={config.nearAccountId || "Not connected"} />
             <InfoRow label="IPFS" value={config.lighthouseApiKey ? "Lighthouse" : "Not configured"} />
             <InfoRow label="Encryption" value="AES-256-GCM" />

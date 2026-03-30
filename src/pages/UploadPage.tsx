@@ -21,7 +21,7 @@ import { uploadToFilecoin } from "@/services/filecoin";
 import { storeProofOnChain } from "@/services/near";
 import { encryptDocument } from "@/services/lit";
 import { uploadToLighthouse } from "@/services/filecoin-real";
-import { storeProofOnNearTestnet } from "@/services/near-real";
+import { storeProofOnNearMainnet } from "@/services/near-real";
 import { encryptWithLit } from "@/services/lit-real";
 import { analyzeDocument, type AIAnalysisResult } from "@/services/ai";
 import { documentStore, type DocumentRecord } from "@/store/documentStore";
@@ -68,7 +68,7 @@ export default function UploadPage() {
   const processDocument = async () => {
     if (!file) return;
 
-    // Validate testnet requirements
+    // Validate mainnet requirements
     if (isReal) {
       if (!config.lighthouseApiKey) {
         toast.error("Please configure Lighthouse API key in settings");
@@ -119,7 +119,7 @@ export default function UploadPage() {
       setStep("blockchain");
       let blockchainProof;
       if (isReal) {
-        const nearResult = await storeProofOnNearTestnet(hash, filecoinResult.cid);
+        const nearResult = await storeProofOnNearMainnet(hash, filecoinResult.cid);
         blockchainProof = {
           transactionHash: nearResult.transactionHash,
           blockHeight: nearResult.blockHeight,
@@ -212,7 +212,7 @@ export default function UploadPage() {
       setStep("done");
       toast.success(
         isReal
-          ? "Document processed on testnet!"
+          ? "Document processed on mainnet!"
           : "Document processed (simulated)!"
       );
     } catch (err: any) {
@@ -237,7 +237,7 @@ export default function UploadPage() {
           Upload a PDF or image to hash, store, encrypt, and analyze
           {isReal && (
             <span className="ml-1 text-primary font-medium">
-              — using real testnet integrations
+              — using real mainnet integrations
             </span>
           )}
         </p>
@@ -337,7 +337,7 @@ export default function UploadPage() {
                   >
                     {s.label}
                     {isActive && isReal && (
-                      <span className="ml-1 text-xs text-primary/60">(testnet)</span>
+                      <span className="ml-1 text-xs text-primary/60">(mainnet)</span>
                     )}
                   </span>
                 </div>
@@ -359,7 +359,7 @@ export default function UploadPage() {
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-semibold text-foreground">
                 Processing Complete
-                {result.mode === "testnet" && (
+                {result.mode === "mainnet" && (
                   <span className="ml-2 text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full font-mono">
                     TESTNET
                   </span>

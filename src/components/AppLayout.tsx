@@ -14,7 +14,7 @@ const navItems = [
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
   const { config } = useNetwork();
-  const isTestnet = config.mode === "testnet";
+  const isMainnet = config.mode === "mainnet";
 
   return (
     <div className="min-h-screen bg-background grid-bg">
@@ -62,17 +62,17 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           <div className="flex items-center gap-2">
             <span
               className={`flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-mono ${
-                isTestnet
+                isMainnet
                   ? "bg-primary/10 text-primary"
                   : "bg-accent/10 text-accent"
               }`}
             >
               <span
                 className={`h-1.5 w-1.5 rounded-full animate-pulse-glow ${
-                  isTestnet ? "bg-primary" : "bg-accent"
+                  isMainnet ? "bg-primary" : "bg-accent"
                 }`}
               />
-              {isTestnet ? "Testnet" : "Simulated"}
+              {isMainnet ? "Mainnet" : "Simulated"}
             </span>
             <SettingsPanel />
           </div>
