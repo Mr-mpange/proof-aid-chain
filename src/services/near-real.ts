@@ -41,7 +41,7 @@ export function getNearAccountId(): string | null {
 export async function signInNear(): Promise<void> {
   const wallet = await initNearConnection();
   if (!wallet.isSignedIn()) {
-    await wallet.requestSignIn({
+    await (wallet as any).requestSignIn({
       contractId: PROOF_CONTRACT,
     });
   }
