@@ -1,11 +1,12 @@
 import { NavLink, useLocation } from "react-router-dom";
-import { Upload, ShieldCheck, Database, Fingerprint } from "lucide-react";
+import { Upload, ShieldCheck, Database, Fingerprint, LayoutDashboard } from "lucide-react";
 import { motion } from "framer-motion";
 import { useNetwork } from "@/context/NetworkContext";
 import SettingsPanel from "@/components/SettingsPanel";
 
 const navItems = [
-  { to: "/", label: "Upload", icon: Upload },
+  { to: "/", label: "Dashboard", icon: LayoutDashboard },
+  { to: "/upload", label: "Upload", icon: Upload },
   { to: "/verify", label: "Verify", icon: ShieldCheck },
   { to: "/records", label: "Records", icon: Database },
 ];
