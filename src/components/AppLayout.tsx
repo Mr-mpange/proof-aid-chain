@@ -1,6 +1,8 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { Upload, ShieldCheck, Database, Fingerprint } from "lucide-react";
 import { motion } from "framer-motion";
+import { useNetwork } from "@/context/NetworkContext";
+import SettingsPanel from "@/components/SettingsPanel";
 
 const navItems = [
   { to: "/", label: "Upload", icon: Upload },
@@ -10,10 +12,11 @@ const navItems = [
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
+  const { config } = useNetwork();
+  const isTestnet = config.mode === "testnet";
 
   return (
     <div className="min-h-screen bg-background grid-bg">
-      {/* Header */}
       <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-xl">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-2.5">
@@ -56,15 +59,25 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           </nav>
 
           <div className="flex items-center gap-2">
-            <span className="flex items-center gap-1.5 rounded-full bg-accent/10 px-3 py-1 text-xs font-mono text-accent">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse-glow" />
-              Testnet
+            <span
+              className={`flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-mono ${
+                isTestnet
+                  ? "bg-primary/10 text-primary"
+                  : "bg-accent/10 text-accent"
+              }`}
+            >
+              <span
+                className={`h-1.5 w-1.5 rounded-full animate-pulse-glow ${
+                  isTestnet ? "bg-primary" : "bg-accent"
+                }`}
+              />
+              {isTestnet ? "Testnet" : "Simulated"}
             </span>
+            <SettingsPanel />
           </div>
         </div>
       </header>
 
-      {/* Main content */}
       <main className="container py-8">
         <motion.div
           key={location.pathname}
